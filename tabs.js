@@ -40,7 +40,7 @@ const Tabs = () => {
                 name="Today" 
                 component={Today} 
                 options={{ 
-                    tabBarLabel: 'Today',
+                    tabBarLabel: 'Add ',
                     tabBarIcon: ({ color, size }) => (
                         <Octicons name="note" size={size} color={color} />
                     ),

@@ -81,7 +81,7 @@ const Table1 = () => {
                     key={index}
                     data={rowData}
                     widthArr={[85, 85, 85, 85]}
-                    style={[styles.row, index % 2 && { backgroundColor: '#F7F6E7' }]}
+                    style={{ ...styles.row, ...(index % 2 && { backgroundColor: '#F7F6E7' }) }}
                     textStyle={styles.text}
                   />
                 ))

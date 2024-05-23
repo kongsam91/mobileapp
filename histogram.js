@@ -18,18 +18,41 @@ const Histogram = () => {
     }
   }, [isFocused]);
 
+  // const fetchData = async () => {
+  //   try {
+  //     const newCase = await AsyncStorage.getItem('newCase');
+  //     console.log("Fetched newCase:", newCase);
+  //     if (newCase != null) {
+  //       const parsedData = JSON.parse(newCase);
+  //       console.log("Parsed Data:", parsedData);
+  //       const aggregatedData = aggregateData(parsedData);
+  //       console.log("Aggregated Data:", aggregatedData);
+  //       const formattedData = formatChartData(aggregatedData);
+  //       console.log("Formatted Data for Chart:", formattedData);
+  //       setChartData(formattedData);
+  //     }
+  //   } catch (error) {
+  //     console.log("Error fetching data:", error);
+  //   }
+  // };
   const fetchData = async () => {
     try {
       const newCase = await AsyncStorage.getItem('newCase');
       console.log("Fetched newCase:", newCase);
-      if (newCase != null) {
+      if (newCase) { // Check if newCase is not null or undefined
         const parsedData = JSON.parse(newCase);
-        console.log("Parsed Data:", parsedData);
-        const aggregatedData = aggregateData(parsedData);
-        console.log("Aggregated Data:", aggregatedData);
-        const formattedData = formatChartData(aggregatedData);
-        console.log("Formatted Data for Chart:", formattedData);
-        setChartData(formattedData);
+        if (Array.isArray(parsedData)) { // Check if parsedData is an array
+          console.log("Parsed Data:", parsedData);
+          const aggregatedData = aggregateData(parsedData);
+          console.log("Aggregated Data:", aggregatedData);
+          const formattedData = formatChartData(aggregatedData);
+          console.log("Formatted Data for Chart:", formattedData);
+          setChartData(formattedData);
+        } else {
+          console.log("Data is not an array");
+        }
+      } else {
+        console.log("No data available");
       }
     } catch (error) {
       console.log("Error fetching data:", error);

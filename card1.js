@@ -34,14 +34,14 @@ const Card1 = ( ) => {
   //list
   const [expanded, setExpanded] = React.useState(true);
   const handlePress = () => setExpanded(!expanded);
-  const [expanded, setExpanded] = React.useState(true);
 
   //card content
   const [item, setItem] = React.useState('');
   const [cost, setCost] = React.useState('');
   const [kind, setkind] = React.useState('');
-
+  const [selectedDate, setselectedDate] = React.useState('');
   const [card, setCard] = React.useState([]);
+  
   const isFocused = useIsFocused();
 
   React.useEffect(() => {
@@ -81,7 +81,7 @@ const Card1 = ( ) => {
       const newCase = await AsyncStorage.getItem('newCase');
       if (newCase != null) {
         setCard(JSON.parse(newCase));
-        console.log("CARD PAGE GET: " + newCase);
+        console.log("CARD PAGE GET: " + JSON.parse(newCase));
       } else {
         setCard([]);
       }
@@ -91,10 +91,11 @@ const Card1 = ( ) => {
     try {
       const nowDate = await AsyncStorage.getItem('selectedDate');
       if (nowDate != null) {
-        setCard(JSON.parse(nowDate));
+
+        setselectedDate(JSON.parse(nowDate));
         console.log("Date GET: " + nowDate);
       } else {
-        setCard([]);
+        console.log("no date");
       }
     } catch (error) {
       console.log(error);
@@ -114,7 +115,7 @@ const Card1 = ( ) => {
   return (
     <View style = {styles.view}>
       <Card style={styles.card}>
-        <Card.Title title="Date~~~"  left={LeftContent} />
+        <Card.Title title= {selectedDate}  left={LeftContent} titleStyle={{ color: 'beige',fontWeight :'bold',fontSize: 20 }} />
         <Card.Content>
           <TextInput
               label="Enter Class"
@@ -192,6 +193,9 @@ const styles = StyleSheet.create({
   },
   Button :{
     backgroundColor: 'beige',
+  },
+  Text :{
+    color: 'beige',
   },
 });
 
